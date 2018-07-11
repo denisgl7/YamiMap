@@ -41,7 +41,7 @@ package
 		{
 			Starling.multitouchEnabled = true;
 			
-			this._starling = new Starling(YamiMap, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
+			this._starling = new Starling(TestMap, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
 			this._starling.supportHighResolutions = true;
 			this._starling.skipUnchangedFrames = true;
 			this._starling.simulateMultitouch = true;

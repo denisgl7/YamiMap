@@ -13,10 +13,10 @@ package
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class YamiMap extends Sprite
+	public class TestMap extends Sprite
 	{
 		
-		public function YamiMap()
+		public function TestMap()
 		{
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddToStage);
 		}

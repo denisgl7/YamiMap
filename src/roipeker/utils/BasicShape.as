@@ -8,7 +8,7 @@ package roipeker.utils
 {
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
-	import roipeker.utils.MathUtils;
+	
 	import starling.display.Canvas;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
@@ -128,8 +128,6 @@ package roipeker.utils
 		{
 			_toX = x;
 			_toY = y;
-			
-			
 			
 			if (_lineTexture)
 			{

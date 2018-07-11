@@ -26,8 +26,6 @@ package maps
 	
 	import maps.config.AbsLayerProvider;
 	
-	import maps.config.AbsLayerProvider;
-	
 	import roipeker.utils.Pooler;
 	
 	import starling.events.EventDispatcher;
@@ -51,12 +49,12 @@ package maps
 		private static var _instanceByUrl:Object = {};
 		private static var _runningRecurrentCleanup:Boolean = false;
 		private static var TMP_FILE:File = new File();
-
+		
 		public static function get():MapTileLoader
 		{
 			return _pool.get() as MapTileLoader;
 		}
-
+		
 		public static function requestTile(url:String, provider:AbsLayerProvider, completeHandler:Function, errorHandler:Function = null):MapTileLoader
 		{
 			var loader:MapTileLoader = MapTileLoader.get();
@@ -72,7 +70,7 @@ package maps
 			loader.load();
 			return loader;
 		}
-
+		
 		// delayForNextSwipe pass <=0 to call it once.
 		public static function cleanUpUnusedMemCache():void
 		{
@@ -95,7 +93,7 @@ package maps
 		{
 			return _instanceByUrl[url] as MapTileLoader;
 		}
-
+		
 		public static function clearAllCache():void
 		{
 			var d:Object = _textureCacheByUrl;
@@ -110,7 +108,7 @@ package maps
 			}
 			_textureCacheByUrl = {}
 		}
-
+		
 		public static function clearCachedTexture(url:String):Boolean
 		{
 			var exists:Boolean = false;
@@ -123,7 +121,7 @@ package maps
 			delete _pendingDisposeTextureCacheByUrl[url];
 			return exists;
 		}
-
+		
 		public static function isTextureExistent(url:String, provider:AbsLayerProvider):Boolean
 		{
 			if (_textureCacheByUrl[url])
@@ -136,13 +134,14 @@ package maps
 				return TMP_FILE.exists;
 			}
 		}
+		
 		//    private var _offlineMode:Boolean = true;
 		
 		public static function getCachedTexture(url:String):Texture
 		{
 			return _textureCacheByUrl[url];
 		}
-
+		
 		public static function addCachedTexture(url:String, texture:Texture):void
 		{
 			if (_textureCacheByUrl[url])
@@ -179,16 +178,17 @@ package maps
 		{
 			return _instanceByUrl[url] as MapTileLoader;
 		}
-
+		
 		private static function initCacheDir():void
 		{
 			cacheDir = SystemUtil.isDesktop ? File.desktopDirectory : File.cacheDirectory;
 			cacheDir = cacheDir.resolvePath('mapcache');
 		}
-
+		
 		public function MapTileLoader()
 		{
 		}
+		
 		// use the provider to resolve filepaths.
 		public var provider:AbsLayerProvider;
 		private var _bytesLoaded:Number = 0;
@@ -228,14 +228,14 @@ package maps
 		}
 		
 		private var _texture:Texture;
-
+		
 		public function get texture():Texture
 		{
 			return _texture;
 		}
 		
 		// clean up everything in mem cache that's not being used.
-
+		
 		// tells if the texture is taken from the cache.
 		private var _usingMemCache:Boolean = false;
 		
