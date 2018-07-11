@@ -8,9 +8,7 @@ package core
 {
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
-	
 	import roipeker.utils.MathUtils;
-	
 	import starling.display.Canvas;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
