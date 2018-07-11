@@ -46,11 +46,6 @@ package
 			this._starling.skipUnchangedFrames = true;
 			this._starling.simulateMultitouch = true;
 			this._starling.antiAliasing = 4;
-			this._starling.addEventListener(starling.events.Event.ROOT_CREATED, function ():void
-			{
-				loadAssets();
-			});
-			//this._starling.showStats = true;
 			this._starling.start();
 			this._scaler = new ScreenDensityScaleFactorManager(this._starling);
 			if (!SystemUtil.isDesktop)
@@ -66,30 +61,6 @@ package
 							_starling.stop(true);
 						});
 			}
-		}
-		
-		private var assets:AssetManager;
-		
-		private function loadAssets():void
-		{
-			var appDir:File = File.applicationDirectory;
-			assets = new AssetManager();
-			assets.verbose = false;
-			assets.dataLoader = new CachingDataLoader('starling_cache');
-			assets.enqueue(appDir.resolvePath("assets"));
-			assets.textureOptions.scale = 2;
-			assets.enqueue(appDir.resolvePath("images"));
-			assets.textureOptions.scale = _starling.contentScaleFactor;
-			assets.enqueue(appDir.resolvePath("font"));
-			assets.loadQueue(startGame);
-			
-		}
-		
-		private function startGame():void
-		{
-			var game:YamiMap = _starling.root as YamiMap;
-			game.start(assets);
-			//setTimeout(removeElements, 150); // delay to make 100% sure there's no flickering.
 		}
 	}
 }

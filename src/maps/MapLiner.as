@@ -5,7 +5,7 @@
 // =================================================================================================
 
 package maps {
-import core.BasicShape;
+import roipeker.utils.BasicShape;
 
 import flash.geom.Point;
 import flash.geom.Rectangle;
@@ -19,7 +19,7 @@ import starling.utils.Pool;
 
 public class MapLiner extends Sprite {
     private var _points:Array;
-    private var _shape:BasicShape;
+    private var _shape:roipeker.utils.BasicShape;
     public var map:YAMIMap;
     private var _lineColor:int;
     private var _lineThick:Number;

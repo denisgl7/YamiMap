@@ -4,7 +4,7 @@
 //
 // =================================================================================================
 
-package core
+package roipeker.utils
 {
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;

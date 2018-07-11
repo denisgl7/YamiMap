@@ -1,74 +1,55 @@
 package
 {
-	import cz.j4w.map.MapLayerOptions;
-	import cz.j4w.map.MapOptions;
-	import cz.j4w.map.geo.GeoMap;
-	import cz.j4w.map.geo.GeoUtils;
-	import cz.j4w.map.geo.Maps;
-	
-	import feathers.controls.LayoutGroup;
-	
-	import flash.geom.Point;
-	
+	import maps.MapLiner;
+	import maps.MapUtils;
 	import maps.YAMIMap;
 	import maps.config.GoogleMapsProvider;
 	import maps.geo.LatLng;
+	import maps.utils.GooglePolylineDencoder;
 	
-	import starling.assets.AssetManager;
-	import starling.display.Image;
-	import starling.textures.Texture;
+	import roipeker.utils.BasicShape;
 	
-	public class YamiMap extends LayoutGroup
+	import starling.display.Quad;
+	import starling.display.Sprite;
+	import starling.events.Event;
+	
+	public class YamiMap extends Sprite
 	{
-		private static var sAssets:AssetManager;
-		public function start(assets:AssetManager):void
+		
+		public function YamiMap()
 		{
-			sAssets = assets;
-			super.initialize();
-			
+			this.addEventListener(Event.ADDED_TO_STAGE, onAddToStage);
+		}
+		
+		private function onAddToStage(event:Event):void
+		{
 			this.createYamiMap();
-//			this.createFeathersMap();
 		}
 		
 		private var map:YAMIMap;
-		private var mainRoadMarker:Image;
+		private var path:MapLiner;
+		
 		private function createYamiMap():void
 		{
 			
 			map = new YAMIMap(stage.stageWidth, stage.stageHeight, this);
-			
 			var provider:GoogleMapsProvider = new GoogleMapsProvider(GoogleMapsProvider.MAPTYPE_ROADMAP, 2, 'ru-RU');
+			
 			provider.useFileCache = true;
 			provider.useMemCache = false;
 			map.addLayerByProvider(provider);
-			map.setZoom(18);
-			map.maxZoomLevel = 18;
+			map.setCenter(new LatLng(64.560139, 39.815226));
+			var q:Quad = new Quad(20, 20, 0xff0000);
+			map.addMarkerAtCoords('uno', 64.560139, 39.815226, q, {title: "pepe"});
+			map.setZoom(14);
+			var directionsString:String = "cw|fFulxoCaDSWYEOAIM?}DOP}Cp@uJb@yF@K]I_AQqBa@mE{@kDq@cDy@_EcAgEkAqBc@i@IgACy@AuDN}DTSBOG}@PkARu@PWJ}AXiCz@QBsAW{E_@eDi@U?s@GkASwBc@y@]eAc@wAs@gDgBgEkBkAk@]Ys@g@s@[GCT_Bx@uGHq@BcA@{@O?BuC@aAHcE?K]CW?q@a@]SmAu@kCcCsAiAGQo@g@IKKFa@TKLs@^cAx@a@n@Wj@]fAQx@Ob@Cv@@`@Rp@"
 			
-			mainRoadMarker = new Image(Texture.fromColor(10, 10));
-			mainRoadMarker.alignPivot();
-			mainRoadMarker.scale = 0.2;
-			map.addMarkerAtCoords('address', 64.546472, 39.765013, mainRoadMarker);
-			var pos:LatLng = new LatLng(64.546472, 39.765013);
-			map.setCenter(pos);
-		}
-		
-		private function createFeathersMap():void
-		{
-			var mapOptions:MapOptions = new MapOptions();
-			mapOptions.initialCenter = new Point(39.765013, 64.546472);
-			mapOptions.initialScale = 1 / 32;
-			mapOptions.disableRotation = true;
-			
-			var geoMap:GeoMap = new GeoMap(mapOptions);
-			geoMap.setSize(stage.stageWidth, stage.stageHeight);
-			addChild(geoMap);
-			
-			var mapScale:Number = 2; // use 1 for non-retina displays
-			GeoUtils.scale = mapScale;
-			
-			var googleMaps:MapLayerOptions = Maps.GOOGLE_MAPS_SCALED(mapScale);
-			googleMaps.notUsedZoomThreshold = 1;
-			geoMap.addLayer("googleMaps", googleMaps);
+			var directionsArr:Array = GooglePolylineDencoder.decode(directionsString);
+			var arr:Array = MapUtils.makeLatLngFromList(directionsArr);
+			path = new MapLiner();
+			path.setLatLngData(arr);
+			path.lineStyleTexture(BasicShape.createRectDotTexture(4, 10, 4), 0x1b76bc, 4);
+			map.addPath(path);
 		}
 	}
 }
