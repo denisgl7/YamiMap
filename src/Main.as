@@ -1,7 +1,5 @@
 package
 {
-	import feathers.utils.ScreenDensityScaleFactorManager;
-	
 	import flash.desktop.NativeApplication;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -9,12 +7,8 @@ package
 	import flash.display3D.Context3DProfile;
 	import flash.display3D.Context3DRenderMode;
 	import flash.events.Event;
-	import flash.filesystem.File;
 	
-	import starling.assets.AssetManager;
 	import starling.core.Starling;
-	import starling.events.Event;
-	import starling.extension.CachingDataLoader;
 	import starling.utils.SystemUtil;
 	
 	//[SWF(width="960",height="640",frameRate="60",backgroundColor="#4a4137")]
@@ -22,7 +16,6 @@ package
 	{
 		
 		private var _starling:Starling;
-		private var _scaler:ScreenDensityScaleFactorManager;
 		
 		public function Main()
 		{
@@ -34,10 +27,10 @@ package
 			}
 			
 			this.mouseEnabled = this.mouseChildren = false;
-			this.loaderInfo.addEventListener(flash.events.Event.COMPLETE, loaderInfo_completeHandler)
+			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler)
 		}
 		
-		private function loaderInfo_completeHandler(e:flash.events.Event):void
+		private function loaderInfo_completeHandler(e:Event):void
 		{
 			Starling.multitouchEnabled = true;
 			
@@ -47,16 +40,15 @@ package
 			this._starling.simulateMultitouch = true;
 			this._starling.antiAliasing = 4;
 			this._starling.start();
-			this._scaler = new ScreenDensityScaleFactorManager(this._starling);
 			if (!SystemUtil.isDesktop)
 			{
 				NativeApplication.nativeApplication.addEventListener(
-						flash.events.Event.ACTIVATE, function (e:*):void
+						Event.ACTIVATE, function (e:*):void
 						{
 							_starling.start();
 						});
 				NativeApplication.nativeApplication.addEventListener(
-						flash.events.Event.DEACTIVATE, function (e:*):void
+						Event.DEACTIVATE, function (e:*):void
 						{
 							_starling.stop(true);
 						});
