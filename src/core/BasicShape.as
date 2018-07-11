@@ -131,6 +131,8 @@ package core
 			_toX = x;
 			_toY = y;
 			
+			
+			
 			if (_lineTexture)
 			{
 				var dx:Number = _toX - _fromX;
