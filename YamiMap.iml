@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="YamiMap">
+    <configurations>
+      <configuration name="YamiMap" target-platform="Mobile" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out/production/YamiMap">
+        <dependencies target-player="30.0">
+          <entries>
+            <entry library-id="739795d1-49e8-4d72-aa8f-db4e105bac6f">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="30.0.0" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+        <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="30.0.0" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="739795d1-49e8-4d72-aa8f-db4e105bac6f" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
